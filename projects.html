@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Charles Joyce</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <style>
+        .parallax-one {
+            /* The image used */
+            background-image: url('img/pythonGame.png');
+
+            /* Full height */
+            height: 40vh;
+            width: 70vw;
+            margin: auto;
+
+            transform: scale(1);
+            /* Create the parallax scrolling effect */
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1s;
+        }
+
+        .parallax-one:hover {
+            transform: scale(1.15);
+        }
+
+        .flip-box {
+            /* background-color: transparent; */
+            /* width: 25%; */
+            height: 250px;
+            margin: 3px;
+            border-width: 0px;
+            border-style: solid;
+            border-radius: 10px;
+            border-color: transparent;
+            perspective: 1000px;
+            font-size: 15pt;
+            background-image: radial-gradient(circle, rgb(111, 94, 214), rgb(43, 42, 51));
+            background-size: cover;
+            background-attachment: fixed;
+            transition: background-image 1s;
+        }
+
+        .flip-box:not(.show-description):hover {
+            border-width: 3px;
+            margin: 0px;
+        }
+
+        .flip-box.dark-mode:not(.show-description):hover {
+            border-width: 3px;
+            margin: 0px;
+        }
+
+        .flip-box-inner {
+            /* position: relative; */
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s ease;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box:not(.show-description) .flip-box-inner:hover {
+            /* transform: scale(1.03); */
+        }
+
+        .flip-box.show-description .flip-box-inner {
+            transform: scale(1) rotateY(-180deg);
+        }
+
+        .flip-box.show-description {
+            /* border-color: transparent; */
+        }
+
+        .flip-box-front,
+        .flip-box-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+
+
+
+        .flip-box-front {
+            color: #f8f8f8;
+            cursor: pointer;
+        }
+
+        .flip-box-back {
+            /* background: url("img/pythonGameDim.png"); */
+            /* background-size: 40em, 26em; */
+            color: white;
+            background-color: #444;
+            transform: rotateY(180deg);
+        }
+
+        .flip-box-back.dark-mode {
+            background-color: #222;
+        }
+
+        .flip-box-back p {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        #projects {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            /* grid-template-rows: 1fr 1fr; */
+            /* flex-wrap: wrap; */
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+
+        @media screen and (max-width: 1536px) {
+
+            /* Hide all except the right side of the nav and the active link item */
+            #projects {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media screen and (max-width: 1152px) {
+
+            /* Hide all except the right side of the nav and the active link item */
+            #projects {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+
+            /* Hide all except the right side of the nav and the active link item */
+            #projects {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #projects article a {
+            color: white;
+        }
+
+        #projects article h2 {
+            user-select: none;
+        }
+
+        #tech-stack-container {
+            margin-left: 10vw;
+            margin-right: 10vw;
+        }
+
+        #tech-stack {
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: space-evenly; */
+            /* box-sizing: border-box; */
+        }
+
+        #tech-stack article {
+            width: 25%;
+        }
+
+        @media screen and (max-width: 1200px) {
+            #tech-stack article {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            #tech-stack article {
+                width: 100%;
+            }
+        }
+
+        #tech-stack .inner-box {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border: #444 2px solid;
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+        }
+
+        #tech-stack .inner-box.dark-mode {
+            border-color: #f8f8f8;
+        }
+
+        #tech-stack .inner-box.dark-mode-transition {
+            transition: border-color 0.8s;
+        }
+
+        #tech-stack img {
+            width: 4rem;
+            height: 4rem;
+            margin: 1rem;
+            background-color: #f8f8f8;
+            padding: 0.5rem;
+        }
+
+        #tech-stack p {
+            flex-grow: 1;
+        }
+
+        .flip-box-front::after {
+            content: "";
+            background-size: cover;
+            /* opacity: 0.5; */
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            border-radius: 10px;
+            z-index: -1;
+        }
+    </style>
+    <link id="mainStyle" rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="pageShow();" onunload="pageUnload();" onclick="hideAllFlipBoxDescriptions();">
+    <header>
+        <nav>
+            <ul id="nav-bar-left">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li id="active-nav-item"><a>Projects</a></li>
+                <li><a class="nav-link" href="skills.html">Skills</a></li>
+                <li><a class="nav-link" href="cv.html">CV</a></li>
+                <li><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+            <ul id="nav-bar-right">
+                <li id="dark-mode-button" onclick="toggleDarkMode();">
+                    <svg id="dark-mode-icon" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                        viewBox="0 0 128 128">
+                        <path id="moon-path" fill="#699DFF" stroke="black" stroke-width="0" d="M 56.00,4.46
+                               C 59.07,4.30 63.19,4.61 62.26,9.02
+                                 61.54,12.42 56.45,15.85 52.31,25.00
+                                 45.24,40.64 49.01,59.34 60.18,72.00
+                                 68.83,81.79 79.80,87.94 93.00,88.00
+                                 101.40,88.04 104.04,87.98 112.00,84.72
+                                 114.31,83.77 118.12,81.81 120.39,83.83
+                                 124.41,87.41 115.43,98.94 113.10,102.00
+                                 102.12,116.43 82.87,124.20 65.00,124.00
+                                 57.10,123.91 49.26,122.05 42.00,118.99
+                                 34.72,115.91 28.53,111.67 23.04,106.00
+                                 2.68,84.93 0.53,54.29 16.34,30.00
+                                 18.73,26.34 20.87,23.16 24.04,20.09
+                                 31.91,12.49 45.26,6.38 56.00,4.46 Z" />
+                        <path id="sun-path" fill="#FCC230" fill="" stroke="black" stroke-width="0" d="M 62.22,4.78
+                            C 72.48,3.21 69.81,21.62 65.78,23.22
+                                57.18,26.63 58.49,9.90 59.74,7.23
+                                60.56,5.47 60.89,5.71 62.22,4.78 Z
+                            M 23.23,20.78
+                            C 28.39,20.01 32.73,23.75 35.40,28.00
+                                37.16,30.80 37.53,34.97 33.85,36.38
+                                28.44,38.47 14.98,26.55 23.23,20.78 Z
+                            M 101.00,20.78
+                            C 113.38,19.05 105.70,33.86 98.00,36.38
+                                93.58,37.83 90.17,34.42 91.62,30.00
+                                92.95,25.94 97.37,22.61 101.00,20.78 Z
+                            M 57.00,34.53
+                            C 68.30,32.68 78.99,35.09 86.79,44.02
+                                101.51,60.87 93.10,88.40 71.00,93.47
+                                42.41,100.03 22.02,65.98 41.21,44.02
+                                45.49,39.12 50.85,36.34 57.00,34.53 Z
+                            M 7.23,59.74
+                            C 10.45,58.88 17.71,58.31 20.77,59.74
+                                24.50,61.48 24.50,66.52 20.77,68.26
+                                18.54,69.31 9.46,69.31 7.23,68.26
+                                2.98,66.28 3.94,62.12 7.23,59.74 Z
+                            M 107.23,59.67
+                            C 110.18,58.96 118.01,58.35 120.77,59.67
+                                124.50,61.28 124.50,66.72 120.77,68.33
+                                118.66,69.35 109.33,69.25 107.23,68.33
+                                102.98,66.28 103.94,62.12 107.23,59.67 Z
+                            M 29.00,92.03
+                            C 33.70,90.61 38.25,92.31 36.38,98.00
+                                35.39,101.03 30.86,105.46 28.00,106.81
+                                23.13,109.11 19.28,105.62 20.78,101.00
+                                22.01,97.20 25.82,94.14 29.00,92.03 Z
+                            M 93.31,92.03
+                            C 98.89,90.12 103.44,94.35 106.26,99.00
+                                107.76,101.47 108.40,104.97 105.57,106.81
+                                100.58,110.05 86.67,99.17 93.31,92.03 Z
+                            M 62.22,104.78
+                            C 72.48,103.21 69.81,121.62 65.78,123.22
+                                57.18,126.63 58.49,109.90 59.74,107.23
+                                60.56,105.47 60.89,105.71 62.22,104.78 Z" />
+                    </svg>
+                </li>
+                <li id="hamburger-item">
+                    <!-- SVG of hamburger symbol - inline so that transition can be used in stylesheet. -->
+                    <svg id="hamburger" onclick="displayResponsiveMenu();" xmlns="http://www.w3.org/2000/svg"
+                        width="40px" height="40px" viewBox="0 0 128 128">
+                        <rect id="hamburger-top" x="40" y="42" width="48" height="6" stroke="black" fill="black"
+                            stroke-width="0" rx="3" />
+                        <rect id="hamburger-middle" x="40" y="58" width="48" height="6" stroke="black" fill="black"
+                            stroke-width="0" rx="3" />
+                        <rect id="hamburger-bottom" x="40" y="74" width="48" height="6" stroke="black" fill="black"
+                            stroke-width="0" rx="3" />
+                    </svg>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main onclick="closeResponsiveMenu();">
+        <h2>Projects</h2>
+        <div id="projects">
+            <article>
+                <div class="flip-box" id="pythonGameFlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Pygame-RPG</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Pygame-RPG</h2>
+                            <p>2D tile-based RPG Demo and Map Editor. Written using python with the pygame library.</p>
+                            <a href="https://github.com/cjjoyce/Pygame-RPG">Click here to view on GitHub.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="LongPipes-Flip-Box" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>LongPipes</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>LongPipes</h2>
+                            <a href="https://github.com/cjjoyce/LongPipes">Click here to view on GitHub.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="filmDatabaseFlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Film Database</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Film Database</h2>
+                            <p>A simple film database program written in Haskell.</p>
+                            <a href="https://github.com/cjjoyce/Film-Database">Click here to view on GitHub.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="Dimmable-Light-Flip-Box" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Dimmable-Light</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Dimmable-Light</h2>
+                            <p>Implementation of a JavaScript object to represent a dimmable light fitting.</p>
+                            <a href="https://github.com/cjjoyce/Dimmable-Light">Click here to view on GitHub.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="configuratorFlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Door Configurator</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Door Configurator</h2>
+                            <p>Configurator implemented in EFACS E/8 ERP system.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project6FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 6</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 6</h2>
+                            <p>Project 6 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project7FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 7</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 7</h2>
+                            <p>Project 7 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project8FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 8</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 8</h2>
+                            <p>Project 8 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project9FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 9</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 9</h2>
+                            <p>Project 9 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project10FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 10</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 10</h2>
+                            <p>Project 10 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project11FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 11</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 11</h2>
+                            <p>Project 11 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="flip-box" id="project12FlipBox" onclick="showFlipBox(this);"
+                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <h2>Project 12</h2>
+                        </div>
+                        <div class="flip-box-back">
+                            <h2>Project 12</h2>
+                            <p>Project 12 will go here.</p>
+                            <a href="javascript:void(0);">Click here to view.</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+    <footer>Copyright &copy 2024 Charles Joyce</footer>
+</body>
+
+</html>
