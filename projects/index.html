@@ -8,141 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
-        .parallax-one {
-            /* The image used */
-            background-image: url('img/pythonGame.png');
-
-            /* Full height */
-            height: 40vh;
-            width: 70vw;
-            margin: auto;
-
-            transform: scale(1);
-            /* Create the parallax scrolling effect */
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            transition: transform 1s;
-        }
-
-        .parallax-one:hover {
-            transform: scale(1.15);
-        }
-
-        .flip-box {
-            /* background-color: transparent; */
-            /* width: 25%; */
-            height: 250px;
-            margin: 3px;
-            border-width: 0px;
-            border-style: solid;
-            border-radius: 10px;
-            border-color: transparent;
-            perspective: 1000px;
-            font-size: 15pt;
-            background-image: radial-gradient(circle, rgb(111, 94, 214), rgb(43, 42, 51));
-            background-size: cover;
-            background-attachment: fixed;
-            transition: background-image 1s;
-        }
-
-        .flip-box:not(.show-description):hover {
-            border-width: 3px;
-            margin: 0px;
-        }
-
-        .flip-box.dark-mode:not(.show-description):hover {
-            border-width: 3px;
-            margin: 0px;
-        }
-
-        .flip-box-inner {
-            /* position: relative; */
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s ease;
-            transform-style: preserve-3d;
-        }
-
-        .flip-box:not(.show-description) .flip-box-inner:hover {
-            /* transform: scale(1.03); */
-        }
-
-        .flip-box.show-description .flip-box-inner {
-            transform: scale(1) rotateY(-180deg);
-        }
-
-        .flip-box.show-description {
-            /* border-color: transparent; */
-        }
-
-        .flip-box-front,
-        .flip-box-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 10px;
-        }
-
-
-
-        .flip-box-front {
-            color: #f8f8f8;
-            cursor: pointer;
-        }
-
-        .flip-box-back {
-            /* background: url("img/pythonGameDim.png"); */
-            /* background-size: 40em, 26em; */
-            color: white;
-            background-color: #444;
-            transform: rotateY(180deg);
-        }
-
-        .flip-box-back.dark-mode {
-            background-color: #222;
-        }
-
-        .flip-box-back p {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
         #projects {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            /* grid-template-rows: 1fr 1fr; */
-            /* flex-wrap: wrap; */
-            /* justify-content: center; */
-            /* align-items: center; */
+            /* display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr; */
         }
 
-        @media screen and (max-width: 1536px) {
-
-            /* Hide all except the right side of the nav and the active link item */
-            #projects {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-        }
-
-        @media screen and (max-width: 1152px) {
-
-            /* Hide all except the right side of the nav and the active link item */
-            #projects {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-
-            /* Hide all except the right side of the nav and the active link item */
-            #projects {
-                grid-template-columns: 1fr;
-            }
+        #projects article {
+            margin-bottom: 30px;
         }
 
         #projects article a {
@@ -153,35 +25,6 @@
             user-select: none;
         }
 
-        #tech-stack-container {
-            margin-left: 10vw;
-            margin-right: 10vw;
-        }
-
-        #tech-stack {
-            margin-top: 50px;
-            display: flex;
-            flex-wrap: wrap;
-            /* justify-content: space-evenly; */
-            /* box-sizing: border-box; */
-        }
-
-        #tech-stack article {
-            width: 25%;
-        }
-
-        @media screen and (max-width: 1200px) {
-            #tech-stack article {
-                width: 50%;
-            }
-        }
-
-        @media screen and (max-width: 700px) {
-            #tech-stack article {
-                width: 100%;
-            }
-        }
-
         #tech-stack .inner-box {
             display: flex;
             align-items: center;
@@ -189,39 +32,6 @@
             border: #444 2px solid;
             border-radius: 0.5rem;
             margin: 0.5rem;
-        }
-
-        #tech-stack .inner-box.dark-mode {
-            border-color: #f8f8f8;
-        }
-
-        #tech-stack .inner-box.dark-mode-transition {
-            transition: border-color 0.8s;
-        }
-
-        #tech-stack img {
-            width: 4rem;
-            height: 4rem;
-            margin: 1rem;
-            background-color: #f8f8f8;
-            padding: 0.5rem;
-        }
-
-        #tech-stack p {
-            flex-grow: 1;
-        }
-
-        .flip-box-front::after {
-            content: "";
-            background-size: cover;
-            /* opacity: 0.5; */
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            position: absolute;
-            border-radius: 10px;
-            z-index: -1;
         }
     </style>
     <link id="mainStyle" rel="stylesheet" href="/style.css">
@@ -317,183 +127,28 @@
         <h2>Projects</h2>
         <div id="projects">
             <article>
-                <div class="flip-box" id="pythonGameFlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Pygame-RPG</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Pygame-RPG</h2>
-                            <p>2D tile-based RPG Demo and Map Editor. Written using python with the pygame library.</p>
-                            <a href="https://github.com/cjjoyce/Pygame-RPG">Click here to view on GitHub.</a>
-                        </div>
-                    </div>
-                </div>
+                <h2>Pygame-RPG</h2>
+                <p>2D tile-based RPG Demo and Map Editor. Written using python with the pygame library.</p>
+                <a href="https://github.com/cjjoyce/Pygame-RPG">Click here to view on GitHub.</a>
             </article>
             <article>
-                <div class="flip-box" id="LongPipes-Flip-Box" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>LongPipes</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>LongPipes</h2>
-                            <a href="https://github.com/cjjoyce/LongPipes">Click here to view on GitHub.</a>
-                        </div>
-                    </div>
-                </div>
+                <h2>LongPipes</h2>
+                <a href="https://github.com/cjjoyce/LongPipes">Click here to view on GitHub.</a>
             </article>
             <article>
-                <div class="flip-box" id="filmDatabaseFlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Film Database</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Film Database</h2>
-                            <p>A simple film database program written in Haskell.</p>
-                            <a href="https://github.com/cjjoyce/Film-Database">Click here to view on GitHub.</a>
-                        </div>
-                    </div>
-                </div>
+                <h2>Film Database</h2>
+                <p>A simple film database program written in Haskell.</p>
+                <a href="https://github.com/cjjoyce/Film-Database">Click here to view on GitHub.</a>
             </article>
             <article>
-                <div class="flip-box" id="Dimmable-Light-Flip-Box" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Dimmable-Light</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Dimmable-Light</h2>
-                            <p>Implementation of a JavaScript object to represent a dimmable light fitting.</p>
-                            <a href="https://github.com/cjjoyce/Dimmable-Light">Click here to view on GitHub.</a>
-                        </div>
-                    </div>
-                </div>
+                <h2>Dimmable-Light</h2>
+                <p>Implementation of a JavaScript object to represent a dimmable light fitting.</p>
+                <a href="https://github.com/cjjoyce/Dimmable-Light">Click here to view on GitHub.</a>
             </article>
             <article>
-                <div class="flip-box" id="configuratorFlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Door Configurator</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Door Configurator</h2>
-                            <p>Configurator implemented in EFACS E/8 ERP system.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project6FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 6</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 6</h2>
-                            <p>Project 6 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project7FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 7</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 7</h2>
-                            <p>Project 7 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project8FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 8</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 8</h2>
-                            <p>Project 8 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project9FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 9</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 9</h2>
-                            <p>Project 9 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project10FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 10</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 10</h2>
-                            <p>Project 10 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project11FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 11</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 11</h2>
-                            <p>Project 11 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article>
-                <div class="flip-box" id="project12FlipBox" onclick="showFlipBox(this);"
-                    onmouseover="flipBoxMouseMove(this, false);" onmouseout="flipBoxMouseMove(this, true);">
-                    <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                            <h2>Project 12</h2>
-                        </div>
-                        <div class="flip-box-back">
-                            <h2>Project 12</h2>
-                            <p>Project 12 will go here.</p>
-                            <a href="javascript:void(0);">Click here to view.</a>
-                        </div>
-                    </div>
-                </div>
+                <h2>This website</h2>
+                <p>A portfolio website written using HTML, CSS and vanilla JavaScript.</p>
+                <a href="https://github.com/cjjoyce/cjjoyce.github.io">Click here to view on GitHub</a>
             </article>
         </div>
     </main>
